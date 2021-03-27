@@ -21,12 +21,18 @@
           <td><%= product.stock %></td>
 
           <td><%= link_to product do %>
-           <%= '<i class="fa fa-cog fa-spin"></i>'.html_safe %>
+           <%= '<i class="fas fa-eye"></i>'.html_safe %>
             <%end%>
           </td>
-          <td><%= link_to 'Edit', edit_product_path(product) %> </td>
+          <td><%= link_to edit_product_path(product) do %> 
+           <%= '<i class="fa fa-cog fa-spin"></i>'.html_safe %>
+            <%end%> 
+          </td>
           
-          <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to product, method: :delete, data: { confirm: 'Are you sure?' } do %>
+           <%= '<i class="fas fa-trash"></i>'.html_safe %>
+            <%end%> 
+            </td>
         </tr>
       <% end %>
     </tbody>
@@ -38,6 +44,8 @@
   <%= link_to 'New Product', new_product_path %> 
 </div > 
 
+
+
 <div style="text-align: left">
-  <a href = "/admins/sign_out" data-method= "DELETE" > sign_out </a>
+  <a href = "/admins/sign_in" data-method= "Get" > sign_in </a>
 </div > 
