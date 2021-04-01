@@ -49,9 +49,7 @@ div style=("text-align: left")
 
 
 
-.col-2
-      = link_to products_path(format: :csv) do
-        = button_tag 'Download CSV', class: 'btn btn-secondary float-right'
+
 
 - if admin_signed_in?
   div
@@ -60,7 +58,9 @@ div style=("text-align: left")
     br
     br
 
-
+  .col-2
+        = link_to products_path(format: :csv) do
+          = button_tag 'Download CSV', class: 'btn btn-secondary float-right'
   .row
     .col
       = form_tag products_csv_upload_path, multipart: true do
