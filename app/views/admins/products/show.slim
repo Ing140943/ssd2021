@@ -1,0 +1,28 @@
+.cointainer-fluid.py-3
+  - if @product.primary_image.attached?
+    img-fluid.w-25 = image_tag @product.primary_image, class: "img-fluid", width: "300px", height: "300px"
+    
+  
+p
+  strong Title :
+  = @product.title
+p
+  strong Description :
+  = @product.description
+p
+  strong Stock :
+  = @product.stock
+p
+  strong Brand :
+  - @product.categories.each do |category|
+    span.badge.badge-primary href="#" = category.brand
+
+.cointainer-fluid.py-3
+- if @product.supporting_images.attached?
+    - @product.supporting_images.each do |image|
+      span.ml-3 = image_tag image, class: "img-fluid", width: "200px", height: "200px"
+br 
+
+= link_to 'Edit', edit_admins_product_path(@product)
+br
+= link_to 'Back', admins_products_path

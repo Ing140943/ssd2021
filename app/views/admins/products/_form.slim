@@ -1,0 +1,55 @@
+= form_with(model: [:admins, product]) do |form|
+  - if product.errors.any?
+    #error_explanation
+      h2
+        = pluralize(product.errors.count, "error")
+        | prohibited this product from being saved:
+      ul
+        - product.errors.each do |error|
+          li= error.full_message
+
+  div class="field.form-group" 
+    = form.label :primary_image
+    = form.file_field :primary_image , class:"form-control"
+    - if product.primary_image.attached?
+      br
+      = image_tag product.primary_image, class: "img-fluid w-25"
+      br
+      = form.label :remove_primary_image
+      = form.check_box(:remove_primary_image)
+    
+  div class="field.form-group" 
+    = form.label :title
+    = form.text_area :title , class:"form-control"
+
+  div class="field.form-group" 
+    = form.label :description
+    = form.text_area :description , class:"form-control"
+
+  div class="field.form-group" 
+    = form.label :stock
+    = form.number_field :stock , class:"form-control"
+
+  div class="field.form-group" 
+    = form.label :categories
+    = form.collection_check_boxes :category_ids, Category.order(:brand), :id, :brand
+
+  div class="field.form-group" 
+    = form.label :Status
+    br/
+    = form.select :status, Product.statuses.keys.map {|u| [u.titleize, u]}
+  
+  div class="field.form-group" 
+    = form.label :supporting_images
+    = form.file_field :supporting_images, multiple: true,  class:"form-control"
+    - if product.supporting_images.attached?
+      br
+      - product.supporting_images.each do |image|
+        span.ml-3 = image_tag image, class: "img-fluid w-25"
+      br
+      = form.label :remove_supporting_images
+      = form.check_box(:remove_supporting_images)
+
+  .actions
+    = form.submit
+
