@@ -1,0 +1,33 @@
+h1 Categories 
+
+css:
+  .button{
+    color: white;
+   }
+  .button:hover{
+    background-color: #008CBA;
+    color: white;
+   }
+
+.row
+  .col-10
+    = form_tag root_path, method: :get do
+      = text_field_tag 'search', @search, placeholder: 'Type to search...',
+        class: 'form-control'
+
+.container
+  table.table.table-hover
+    thead
+      tr
+        th Brand
+
+    tbody
+        - @categories.each do |category|
+            td = category.brand
+
+            td= link_to 'Show', category 
+            td= link_to 'Edit', edit_category_path(category) 
+            td= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } 
+
+= link_to 'New Category', new_category_path
+= link_to 'Back', admins_products_path
