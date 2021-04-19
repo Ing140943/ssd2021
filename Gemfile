@@ -1,7 +1,12 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+
+
 ruby '3.0.0'
+
+# For aws storage
+gem 'aws-sdk-s3'
 # For pagination
 gem 'kaminari'
 # For authentication

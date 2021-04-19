@@ -80,23 +80,28 @@ module Admins
 
 
 
-    private
-      # Use callbacks to share common setup or constraints between actions.
-      def set_product
-        @product = Product.find(params[:id])
-      end
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_product
+      @product = Product.find(params[:id])
+    end
 
-      # Only allow a list of trusted parameters through.
-      def product_params
-        def product_params
-          params.require(:product).permit(:title, :description, :stock, :primary_image, :remove_primary_image, :remove_supporting_images, :category_ids=>[], :supporting_images => [])
-        end
-      end
-      
-      def generate_csv(products)
-        products.map do |a|
-          [a.title, a.description, a.stock, a.status].join(',')
-        end.join("\n")
-      end
+    # Only allow a list of trusted parameters through.
+    def product_params
+        params.require(:product).permit(:title, :description, :stock, :status, :primary_image, :remove_primary_image, :remove_supporting_images, :supporting_images=>[], :category_ids=>[])
+    end
+
+    def generate_csv(products)
+      products.map do |a|
+        [a.title, a.description].join(',')
+      end.join("\n")
+    end
+    
+    def generate_csv(products)
+      products.map do |a|
+        [a.title, a.description, a.stock, a.status].join(',')
+      end.join("\n")
+    end
   end
+  
 end

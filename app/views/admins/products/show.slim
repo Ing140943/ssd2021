@@ -21,8 +21,12 @@ p
 - if @product.supporting_images.attached?
     - @product.supporting_images.each do |image|
       span.ml-3 = image_tag image, class: "img-fluid", width: "200px", height: "200px"
-br 
 
-= link_to 'Edit', edit_admins_product_path(@product)
-br
-= link_to 'Back', admins_products_path
+- if admin_signed_in?
+  br 
+  = link_to 'Edit', edit_admins_product_path(@product)
+  br
+  = link_to 'Back', admins_products_path 
+- else 
+  br
+  = link_to 'Back', root_path 
